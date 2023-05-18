@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <h3>{{ productService.isEditMode  ? "Update Product" : "Add Product"}}</h3>
+        <div class="card card-body">
+            <form #bookForm = "ngForm" (ngSubmit)="addProduct(bookForm)">
+                
+                <ng-container *ngIf="productService.isEditMode">
+                    <input name="_id" [(ngModel)]="productService.selectedProduct._id" type="hidden">
+                </ng-container>
+
+                <div class="form-group mt-2">
+                    <input name="name" [(ngModel)]="productService.selectedProduct.name" type="text" class="form-control" placeholder="Enter name">
+                </div>
+
+                <div class="form-group mt-2">
+                    <input name="price" [(ngModel)]="productService.selectedProduct.price" type="text" class="form-control" placeholder="Enter price">
+                </div>
+
+                <div class="form-group mt-2">
+                    <input name="brand" [(ngModel)]="productService.selectedProduct.brand" type="text" class="form-control" placeholder="Enter brand">
+                </div>
+
+                <div class="form-group mt-2">
+                    <input name="qualiti" [(ngModel)]="productService.selectedProduct.qualiti" type="text" class="form-control" placeholder="Enter qualiti">
+                </div>
+
+                <div class="for-group mt-2">
+                    <div class="form-control border-0">
+                        <button  class="btn btn-success btn-sm mx-2" type="submit">Save</button>
+                        <button class="btn btn-secondary btn-sm" type="reset">Clean</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Brand</th>
+                    <th>Qualiti</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of productService.products">
+                    <td>{{ book.name }}</td>
+                    <td>{{ book.price }}</td>
+                    <td>{{ book.brand }}</td>
+                    <td>{{ book.qualiti }}</td>
+                    <td>
+                        <button (click)="updateProduct(book)" class="btn btn-primary btn-sm" >Update</button>
+                        <button (click)="deleteProduct(book)" class="btn btn-danger btn-sm" >Delete</button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <h3>{{ employeeService.isEditMode  ? "Update Employee" : "Add Employee"}}</h3>
+        <div class="card card-body">
+            <form #bookForm = "ngForm" (ngSubmit)="addEmployee(bookForm)">
+                
+                <ng-container *ngIf="employeeService.isEditMode">
+                    <input name="_id" [(ngModel)]="employeeService.selectedEmployee._id" type="hidden">
+                </ng-container>
+
+                <div class="form-group mt-2">
+                    <input name="name" [(ngModel)]="employeeService.selectedEmployee.name" type="text" class="form-control" placeholder="Enter name">
+                </div>
+
+                <div class="form-group mt-2">
+                    <input name="lastname" [(ngModel)]="employeeService.selectedEmployee.lastname" type="text" class="form-control" placeholder="Enter lastname">
+                </div>
+
+                <div class="form-group mt-2">
+                    <input name="age" [(ngModel)]="employeeService.selectedEmployee.age" type="text" class="form-control" placeholder="Enter age">
+                </div>
+
+                <div class="form-group mt-2">
+                    <input name="position" [(ngModel)]="employeeService.selectedEmployee.position" type="text" class="form-control" placeholder="Enter position">
+                </div>
+
+                <div class="form-group mt-2">
+                    <input name="office" [(ngModel)]="employeeService.selectedEmployee.office" type="text" class="form-control" placeholder="Enter office">
+                </div>
+
+                <div class="form-group mt-2">
+                    <input name="salary" [(ngModel)]="employeeService.selectedEmployee.salary" type="number" class="form-control" placeholder="Enter salary">
+                </div>
+
+                <div class="for-group mt-2">
+                    <div class="form-control border-0">
+                        <button  class="btn btn-success btn-sm mx-2" type="submit">Save</button>
+                        <button class="btn btn-secondary btn-sm" type="reset">Clean</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Last Name</th>
+                    <th>Age</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of employeeService.employees">
+                    <td>{{ book.name }}</td>
+                    <td>{{ book.lastname }}</td>
+                    <td>{{ book.age }}</td>
+                    <td>{{ book.position }}</td>
+                    <td>{{ book.office }}</td>
+                    <td>{{ book.salary }}</td>
+                    <td>
+                        <button (click)="updateEmployee(book)" class="btn btn-primary btn-sm" >Update</button>
+                        <button (click)="deleteEmployee(book)" class="btn btn-danger btn-sm" >Delete</button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
